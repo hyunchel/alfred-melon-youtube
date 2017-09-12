@@ -1,0 +1,37 @@
+{
+  "name": "alfred-melon-youtube",
+  "version": "0.0.1",
+  "description": "Enjoy Melon chart music on Youtube playlist.",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hyunchel/alfred-melon-youtube.git"
+  },
+  "keywords": [
+    "Alfred-Workflow",
+    "Melon",
+    "Youtube",
+    "music",
+    "chart",
+    "playlist"
+  ],
+  "author": "Hyunchel Kim",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/hyunchel/alfred-melon-youtube/issues"
+  },
+  "homepage": "https://github.com/hyunchel/alfred-melon-youtube#readme",
+  "dependencies": {
+    "alfy": "^0.6.0",
+    "googleapis": "^21.3.0",
+    "melon-chart-api": "^1.1.3",
+    "r-json": "^1.2.8",
+    "readline": "^1.3.0"
+  },
+  "devDependencies": {
+    "jest": "^21.0.2"
+  }
+}
