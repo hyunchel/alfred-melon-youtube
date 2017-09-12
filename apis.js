@@ -5,7 +5,7 @@ const { oauth2Client, authenticate } = require('./auth');
 authenticate();
 
 const search = {
-   list(query, callaback) {
+   list(query, callback) {
         /**
          * FIXME: Must add the following options near future:
          * topicId (for music)
@@ -21,7 +21,15 @@ const search = {
             type: 'video',
             maxResults: 10,
         };
-        youtube.search.list(requestOptions, callback);
+        return new Promise((resolve, reject) => {
+            const cb = (err, resp) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(callback(err, resp))
+            };
+            youtube.search.list(requestOptions, cb);
+        });
    },
 };
 
@@ -33,7 +41,15 @@ const playlists = {
             mine: true,
             maxResults: 25,
         };
-        youtube.playlists.list(requestOptions, callback);
+        return new Promise((resolve, reject) => {
+            const cb = (err, resp) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(callback(err, resp))
+            };
+            youtube.playlists.list(requestOptions, cb);
+        });
     },
 
     insert(title, description, callback) {
@@ -50,7 +66,15 @@ const playlists = {
                 }
             }
         };
-        youtube.playlists.insert(requestOptions, callback);
+        return new Promise((resolve, reject) => {
+            const cb = (err, resp) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(callback(err, resp))
+            };
+            youtube.playlists.insert(requestOptions, cb);
+        });
     },
 
     update(playlistId, title, description, callback) {
@@ -60,14 +84,30 @@ const playlists = {
             title,
             description,
         };
-        youtube.playlists.update(requestOptions, callback);
+        return new Promise((resolve, reject) => {
+            const cb = (err, resp) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(callback(err, resp))
+            };
+            youtube.playlists.update(requestOptions, cb);
+        });
     },
 
     delete(playlistId, callback) {
         const requestOptions = {
             id: playlistId,
         };
-        youtube.playlists.delete(requestOptions, callback);
+        return new Promise((resolve, reject) => {
+            const cb = (err, resp) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(callback(err, resp))
+            };
+            youtube.playlists.delete(requestOptions, cb);
+        });
     },
 };
 
@@ -79,7 +119,15 @@ const playlistItems = {
             part: 'snippet',
             maxResults: 10
         };
-        youtube.playlistItems.list(requestOptions, callback);
+        return new Promise((resolve, reject) => {
+            const cb = (err, resp) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(callback(err, resp))
+            };
+            youtube.playlistItems.list(requestOptions, cb);
+        });
     },
 
     insert(playlistId, videoId, callback) {
@@ -97,7 +145,15 @@ const playlistItems = {
                 },
             },
         };
-        youtube.playlistItems.insert(requestOptions, callback);
+        return new Promise((resolve, reject) => {
+            const cb = (err, resp) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(callback(err, resp))
+            };
+            youtube.playlistItems.insert(requestOptions, cb);
+        });
     },
 
     update(playlistId, playlistItemId, videoId, position, callback) {
@@ -116,7 +172,15 @@ const playlistItems = {
                 }
             },
         };
-        youtube.playlistItems.update(requestOptions, callback);
+        return new Promise((resolve, reject) => {
+            const cb = (err, resp) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(callback(err, resp))
+            };
+            youtube.playlistItems.update(requestOptions, cb);
+        });
 
     },
 
@@ -125,7 +189,15 @@ const playlistItems = {
             auth: oauth2Client,
             id: playlistItemId,
         };
-        youtube.playlistItems.delete(requestOptions, callback);
+        return new Promise((resolve, reject) => {
+            const cb = (err, resp) => {
+                if (err) {
+                    reject(err);
+                }
+                resolve(callback(err, resp))
+            };
+            youtube.playlistItems.delete(requestOptions, cb);
+        });
     },
 };
 

@@ -7,7 +7,7 @@ const { playlistItems } = require('./apis');
  * @param {function} callback A callback function to run after the playlist is fetched.
  */
 const listPlaylistItems = (playlistId, callback) => {
-    playlistItems.list(playlistId, callback);
+    return playlistItems.list(playlistId, callback);
 };
 
 /**
@@ -18,7 +18,7 @@ const listPlaylistItems = (playlistId, callback) => {
  * @param {function} callback A callback function to run after the item is inserted.
  */
 const insertPlaylistItems = (playlistId, videoId, callback) => {
-    playlistItems.insert(playlistId, videoId, callback);
+    return playlistItems.insert(playlistId, videoId, callback);
 };
 
 /**
@@ -31,7 +31,7 @@ const insertPlaylistItems = (playlistId, videoId, callback) => {
  * @param {function} callback A callback function to run after the playlist is updated.
  */
 const updatePlaylistItems = (playlistId, playlistItemId, videoId, position, callback) => {
-    playlistItems.update(playlistId, playlistItemId, videoId, position, callback);
+    return playlistItems.update(playlistId, playlistItemId, videoId, position, callback);
 };
 
 /**
@@ -41,7 +41,7 @@ const updatePlaylistItems = (playlistId, playlistItemId, videoId, position, call
  * @param {function} callback A callback function to run after the item is deleted.
  */
 const deletePlaylistItems = (playlistItemId, callback) => {
-    playlistItems.delete(playlistItemId, callback);
+    return playlistItems.delete(playlistItemId, callback);
 };
 
 module.exports = {

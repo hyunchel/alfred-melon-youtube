@@ -6,7 +6,7 @@ const { playlists } = require('./apis');
  * @param {function} callback A callback function to run after playlists are fetched.
  */
 const listPlaylist = (callback) => {
-    playlists.list(callback);
+    return playlists.list(callback);
 };
 
 /**
@@ -17,7 +17,7 @@ const listPlaylist = (callback) => {
  * @param {function} callback A callback function to run after playlists are fetched.
  */
 const insertPlaylist = (title, description, callback) => {
-    playlists.insert(title, description, callback);
+    return playlists.insert(title, description, callback);
 };
 
 /**
@@ -30,7 +30,7 @@ const insertPlaylist = (title, description, callback) => {
  * @param {function} callback A callback function to run after playlists are fetched.
  */
 const updatePlaylist = (playlistId, title, description, callback) => {
-    playlists.update(playlistId, title, description, callback);
+    return playlists.update(playlistId, title, description, callback);
 };
 
 /**
@@ -40,7 +40,7 @@ const updatePlaylist = (playlistId, title, description, callback) => {
  * @param {function} callback A callback function to run after playlists are fetched.
  */
 const deletePlaylist = (playlistId, callback) => {
-    playlists.delete(playlistId, callback);
+    return playlists.delete(playlistId, callback);
 };
 
 const searchForPlaylist = (title, callback) => {

@@ -7,21 +7,21 @@ const { search } = require('./apis');
  * @param {function} callback A callback function to run after the search result is fetched.
  */
 const searchVideos = (query, callback) => {
-    search.list(query, callback);
+    return search.list(query, callback);
 };
 
 
-const query = 'Jisung Park';
-const callback = (err, resp) => {
-    if (err) {
-        return console.error(err);
-    }
-    resp.items.map((item) => {
-        // console.log(item.id.videoId);
-        // console.log(item.snippet.title);
-        // console.log(item.snippet.description);
-    });
-}
+// const query = 'Jisung Park';
+// const callback = (err, resp) => {
+//     if (err) {
+//         return console.error(err);
+//     }
+//     resp.items.map((item) => {
+//         // console.log(item.id.videoId);
+//         console.log(item.snippet.title);
+//         // console.log(item.snippet.description);
+//     });
+// }
 // searchVideos(query, callback);
 
 module.exports = {
