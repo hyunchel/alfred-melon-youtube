@@ -1,27 +1,4 @@
-const google = require('googleapis');
-const youtube = google.youtube('v3');
-const { oauth2Client, authenticate } = require('./auth');
-
-authenticate();
-
-const doSearch = (query, callback) => {
-    /**
-     * FIXME: Must add the following options near future:
-     * topicId (for music)
-     * publishedAfter
-     * order
-     * regionCode 
-     * location
-     */
-    const requestOptions = {
-        auth: oauth2Client,
-        part: 'snippet',
-        q: query,
-        type: 'video',
-        maxResults: 10,
-    };
-    youtube.search.list(requestOptions, callback);
-};
+const { search } = require('./apis');
 
 /**
  * searchVideos
@@ -30,7 +7,7 @@ const doSearch = (query, callback) => {
  * @param {function} callback A callback function to run after the search result is fetched.
  */
 const searchVideos = (query, callback) => {
-    doSearch(query, callback);
+    search.list(query, callback);
 };
 
 
@@ -45,7 +22,7 @@ const callback = (err, resp) => {
         // console.log(item.snippet.description);
     });
 }
-searchVideos(query, callback);
+// searchVideos(query, callback);
 
 module.exports = {
     searchVideos,
