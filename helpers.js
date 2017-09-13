@@ -1,6 +1,6 @@
 const Melon = require('melon-chart-api');
 const { searchVideos } = require('./apis/search');
-const { listPlaylists, insertPlaylists } = require('./apis/playlists');
+const { listPlaylists, insertPlaylists, deletePlaylists } = require('./apis/playlists');
 const { insertPlaylistItems } = require('./apis/playlistItems');
 
 /**
@@ -112,9 +112,21 @@ const insertIntoPlaylist = (data) => {
     });
 };
 
+/**
+ * deletePlaylist
+ * Deletes a playlist with given playlistId.
+ * @param {object} data An object that contains playlist ID.
+ */
+const deletePlaylist = (data) => {
+    const playlistId = data.playlistId;
+    const callback = () => {};
+    return deletePlaylists(playlistId, callback);
+};
+
 module.exports = {
     getQueries,
     getVideoIds,
     getPlaylistId,
     insertIntoPlaylist,
+    deletePlaylist,
 }

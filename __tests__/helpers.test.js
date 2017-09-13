@@ -8,6 +8,7 @@ const {
     getVideoIds,
     getPlaylistId,
     insertIntoPlaylist,
+    deletePlaylist,
 } = require('../helpers');
 
 jest.mock('../apis/apis');
@@ -58,4 +59,14 @@ test('insertIntoPlaylist API call count', () => {
         expect(playlistItems.insert.mock.calls[2][1]).toBeDefined();
         expect(playlistItems.insert.mock.calls[2][2]).toBeDefined();
     }, 500 * 3)
+});
+
+test('deletePlaylist API call count', () => {
+    const playlistId = 'some playlist ID';
+    const data = { playlistId };
+    playlists.delete.mockClear();
+    deletePlaylist(data);
+    expect(playlists.delete.mock.calls.length).toBe(1);
+    expect(playlists.delete.mock.calls[0][0]).toBeDefined();
+    expect(playlists.delete.mock.calls[0][1]).toBeDefined();
 });
