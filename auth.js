@@ -21,9 +21,7 @@ var rl = readline.createInterface({
 
 // generate a url that asks permissions for Google+ and Google Calendar scopes
 var scopes = [
-  'https://www.googleapis.com/auth/youtubepartner',
   'https://www.googleapis.com/auth/youtube',
-  'https://www.googleapis.com/auth/youtube.upload',
 ];
 
 var url = oauth2Client.generateAuthUrl({
@@ -40,8 +38,11 @@ var url = oauth2Client.generateAuthUrl({
 const getAccessToken = (oauth2Client, store, callback) => {
     const tokens = store.get('tokens');
     if (tokens) {
-        oauth2Client.setCredentials(tokens);
-        callback();
+        oauth2Client.refreshAccessToken(() => {
+            oauth2Client.setCredentials(tokens);
+            store.set('tokens', tokens);
+            callback();
+        })
     } else {
         console.log('Visit URL:\n', url);
         rl.question('Enter the code here:', function (code) {
