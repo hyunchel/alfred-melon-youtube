@@ -1,10 +1,10 @@
-const { playlists } = require('../apis');
+const { playlists } = require('../apis/apis');
 const {
-    listPlaylist,
-    insertPlaylist,
-    updatePlaylist,
-    deletePlaylist,
-} = require('../playlists');
+    listPlaylists,
+    insertPlaylists,
+    updatePlaylists,
+    deletePlaylists,
+} = require('../apis/playlists');
 const KINDS = {
     list: 'youtube#playlistListResponse',
     insert: 'youtube#playlist',
@@ -12,12 +12,12 @@ const KINDS = {
     delete: 'youtube#playlistDeleteResponse',
 };
 
-jest.mock('../apis');
+jest.mock('../apis/apis');
 
 test('responds List', () => {
     const callback = (err, resp) => {};
     playlists.list.mockClear();
-    listPlaylist(callback);
+    listPlaylists(callback);
     expect(playlists.list.mock.calls.length).toBe(1);
     expect(playlists.list.mock.calls[0][0]).toBeDefined();
 });
@@ -27,7 +27,7 @@ test('responds Insert', () => {
     const description = 'some description';
     const callback = (err, resp) => {};
     playlists.insert.mockClear();
-    insertPlaylist(title, description, callback);
+    insertPlaylists(title, description, callback);
     expect(playlists.insert.mock.calls.length).toBe(1);
     expect(playlists.insert.mock.calls[0][0]).toBeDefined();
     expect(playlists.insert.mock.calls[0][1]).toBeDefined();
@@ -40,7 +40,7 @@ test('responds Update', () => {
     const description = 'some description';
     const callback = (err, resp) => {};
     playlists.update.mockClear();
-    updatePlaylist(playlistId, title, description, callback);
+    updatePlaylists(playlistId, title, description, callback);
     expect(playlists.update.mock.calls.length).toBe(1);
     expect(playlists.update.mock.calls[0][0]).toBeDefined();
     expect(playlists.update.mock.calls[0][1]).toBeDefined();
@@ -52,7 +52,7 @@ test('responds Delete', () => {
     const playlistId = 'some playlist ID';
     const callback = (err, resp) => {};
     playlists.delete.mockClear();
-    deletePlaylist(playlistId, callback);
+    deletePlaylists(playlistId, callback);
     expect(playlists.delete.mock.calls.length).toBe(1);
     expect(playlists.delete.mock.calls[0][0]).toBeDefined();
     expect(playlists.delete.mock.calls[0][1]).toBeDefined();

@@ -1,6 +1,6 @@
 const google = require('googleapis');
 const youtube = google.youtube('v3');
-const { oauth2Client, authenticate } = require('./auth');
+const { oauth2Client, authenticate } = require('../auth');
 
 authenticate();
 

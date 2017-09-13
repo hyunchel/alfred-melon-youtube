@@ -1,10 +1,10 @@
-const { search } = require('../apis');
-const { searchVideos } = require('../search');
+const { search } = require('../apis/apis');
+const { searchVideos } = require('../apis/search');
 const KINDS = {
     list: 'youtube#searchListResponse',
 };
 
-jest.mock('../apis');
+jest.mock('../apis/apis');
 
 test('responds List', () => {
     const query = 'Jisung Park';

@@ -1,27 +1,27 @@
 const { playlists } = require('./apis');
 
 /**
- * listPlaylist
+ * listPlaylists
  * Lists all playlists.
  * @param {function} callback A callback function to run after playlists are fetched.
  */
-const listPlaylist = (callback) => {
+const listPlaylists = (callback) => {
     return playlists.list(callback);
 };
 
 /**
- * insertPlaylist
+ * insertPlaylists
  * Creates a new playlist with given name and description.
  * @param {string} title A name of playlist to create.
  * @param {string} description A description for new playlist.
  * @param {function} callback A callback function to run after playlists are fetched.
  */
-const insertPlaylist = (title, description, callback) => {
+const insertPlaylists = (title, description, callback) => {
     return playlists.insert(title, description, callback);
 };
 
 /**
- * updatePlaylist
+ * updatePlaylists
  * Updates a playlist with given title and description.
  * NOTE: Update is performed on the first playlist that matches the given title. 
  * @param {string} queryTitle A title of playlist to update.
@@ -29,17 +29,17 @@ const insertPlaylist = (title, description, callback) => {
  * @param {string} description New description for the playlist.
  * @param {function} callback A callback function to run after playlists are fetched.
  */
-const updatePlaylist = (playlistId, title, description, callback) => {
+const updatePlaylists = (playlistId, title, description, callback) => {
     return playlists.update(playlistId, title, description, callback);
 };
 
 /**
- * deletePlaylist
+ * deletePlaylists
  * Request Google Youtube API to delete a playlist with given title. 
  * @param {string} title A title of playlist to delete.
  * @param {function} callback A callback function to run after playlists are fetched.
  */
-const deletePlaylist = (playlistId, callback) => {
+const deletePlaylists = (playlistId, callback) => {
     return playlists.delete(playlistId, callback);
 };
 
@@ -59,8 +59,8 @@ const searchForPlaylist = (title, callback) => {
 };
 
 module.exports = {
-    listPlaylist,
-    insertPlaylist,
-    updatePlaylist,    
-    deletePlaylist,
+    listPlaylists,
+    insertPlaylists,
+    updatePlaylists,    
+    deletePlaylists,
 }

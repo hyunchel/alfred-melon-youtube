@@ -1,10 +1,10 @@
-const { playlistItems } = require('../apis');
+const { playlistItems } = require('../apis/apis');
 const {
     listPlaylistItems,
     insertPlaylistItems,
     updatePlaylistItems,
     deletePlaylistItems,
-} = require('../playlistItems');
+} = require('../apis/playlistItems');
 const KINDS = {
     list: 'youtube#playlistListResponse',
     insert: 'youtube#playlist',
@@ -12,7 +12,7 @@ const KINDS = {
     delete: 'youtube#playlistDeleteResponse',
 };
 
-jest.mock('../apis');
+jest.mock('../apis/apis');
 
 test('responds List', () => {
     const playlistId = '';
