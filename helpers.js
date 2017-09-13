@@ -9,7 +9,9 @@ const { insertPlaylistItems } = require('./apis/playlistItems');
  * @param {string} date String representation of a date.
  * @param {number} cutLine Number of ranks to receieve.
  */
-const getQueries = (date, cutLine) => {
+const getQueries = (data) => {
+    const date = data.date;
+    const cutLine = data.cutLine;
     return Melon(date, { cutLine }).weekly().then(chart => {
         const queries = chart.data.map(d => `${d.title} ${d.artist}`);
         return {

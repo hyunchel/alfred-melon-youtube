@@ -6,10 +6,12 @@ const {
     insertIntoPlaylist,
     deletePlaylist,
 } = require('./helpers');
+const { getAuthenticated } = require('./auth');
 
 
 const createAction = (date, cutLine) => {
-    getQueries(date, cutLine)
+    getAuthenticated(alfy.config)
+        .then(getQueries)
         .then(getVideoIds)
         .then(getPlaylistId)
         .then(insertIntoPlaylist)
@@ -17,7 +19,8 @@ const createAction = (date, cutLine) => {
 };
 
 const deleteAction = (date, cutLine) => {
-    getQueries(date, cutLine)
+    getAuthenticated(alfy.config)
+        .then(getQueries)
         .then(getVideoIds)
         .then(getPlaylistId)
         .then(deletePlaylist)

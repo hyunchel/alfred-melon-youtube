@@ -39,46 +39,41 @@ var url = oauth2Client.generateAuthUrl({
   // state: { foo: 'bar' }
 });
 
-const getAccessToken = (oauth2Client, callback) => {
-    console.log('Visit URL: ', url);
-    rl.question('Enter the code here:', function (code) {
-        // request access token
-        oauth2Client.getToken(code, function (err, tokens) {
-            if (err) {
-                return callback(err);
-            }
-            // set tokens to the client
-            // TODO: tokens should be set by OAuth2 client.
-            oauth2Client.setCredentials(tokens);
-            callback();
+const getAccessToken = (oauth2Client, store, callback) => {
+    const tokens = store.get('tokens');
+    if (tokens) {
+        oauth2Client.setCredentials(tokens);
+        callback();
+    } else {
+        console.log('Visit URL: ', url);
+        rl.question('Enter the code here:', function (code) {
+            // request access token
+            oauth2Client.getToken(code, function (err, tokens) {
+                if (err) {
+                    return callback(err);
+                }
+                oauth2Client.setCredentials(tokens);
+                store.set('tokens', tokens);
+                callback();
+            });
         });
-    });
+    }
 };
 
-/**
- * TEMPORARY!
- */
-
-// getAccessToken(oauth2Client, (err, tokens) => {
-//     if (err) {
-//         return console.error(err);
-//     }
-//     console.log(tokens);
-//     console.log(oauth2Client);
-// });
-// getAccessToken(oauth2Client, listPlaylists);
-
-// Retrieve tokens via token exchange explained above or set them:
-const authenticate = () => {
-    oauth2Client.setCredentials({
-        access_token: 'ya29.GlvEBAE1MyblMvQEtqqcPKKtOHdzup-Dby4kR3tVgadEvri7-L76b58IUVMvww9zakC6caHDNnil9VoTsx6O9sEFUhJLYwYG4SXFaqgwJ3PuznBjxd4nN2xsRyY0',
-        refresh_token: '1/4f0x0vHZoeGM-X0ImoR0qUEnghCaVNQeSNMsoZAL9sw'
-        // Optional, provide an expiry_date (milliseconds since the Unix Epoch)
-        // expiry_date: (new Date()).getTime() + (1000 * 60 * 60 * 24 * 7)
-    });
-};
+const getAuthenticated = (store) => {
+    return new Promise((resolve, reject) => {
+        const cb = (err, resp) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(resp);
+        }
+        getAccessToken(oauth2Client, store, cb);
+    })
+}
 
 module.exports = {
     oauth2Client,
-    authenticate,
+    getAccessToken,
+    getAuthenticated,
 }
