@@ -10,20 +10,6 @@ const searchVideos = (query, callback) => {
     return search.list(query, callback);
 };
 
-
-// const query = 'Jisung Park';
-// const callback = (err, resp) => {
-//     if (err) {
-//         return console.error(err);
-//     }
-//     resp.items.map((item) => {
-//         // console.log(item.id.videoId);
-//         console.log(item.snippet.title);
-//         // console.log(item.snippet.description);
-//     });
-// }
-// searchVideos(query, callback);
-
 module.exports = {
     searchVideos,
 }

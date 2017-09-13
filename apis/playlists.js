@@ -43,21 +43,6 @@ const deletePlaylists = (playlistId, callback) => {
     return playlists.delete(playlistId, callback);
 };
 
-const searchForPlaylist = (title, callback) => {
-    playlists.list(searchForPlaylist(title, callback))
-    return ((err, resp) => {
-        if (err) {
-            return callback(err);
-        }
-        const items = resp.items.filter(p => p.snippet.title == title);
-        if (items.length) {
-            const playlistId = items[0].id;
-            // FIXME: What is the point of return?
-            return doUpdate(playlistId, title, description, callback);
-        }
-    });
-};
-
 module.exports = {
     listPlaylists,
     insertPlaylists,

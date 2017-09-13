@@ -13,7 +13,7 @@ const {
 jest.mock('../apis/apis');
 
 test('getVideoIds API call count', () => {
-    const data = [0, 1, 2];
+    const data = { queries: [0, 1, 2] };
     search.list.mockClear();
     getVideoIds(data);
     expect(search.list.mock.calls.length).toBe(3);
@@ -26,7 +26,10 @@ test('getVideoIds API call count', () => {
 });
 
 test('getPlaylistId API call count', () => {
-    const data = [0, 1, 2];
+    const data = {
+        dates: { start: undefined, end: undefined },
+        videoIds: [0, 1, 2],
+    };
     playlists.list.mockClear();
     // Make this function to return a promise.
     playlists.list = jest.fn()
@@ -40,7 +43,7 @@ test('getPlaylistId API call count', () => {
 test('insertIntoPlaylist API call count', () => {
     const playlistId = 'some playlist ID';
     const videoIds = [0, 1, 2];
-    const data = { playlistId, data: videoIds };
+    const data = { playlistId, videoIds };
     playlistItems.insert.mockClear();
     insertIntoPlaylist(data);
     setTimeout(() => {
