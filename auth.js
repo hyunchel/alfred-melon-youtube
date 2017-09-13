@@ -38,6 +38,7 @@ var url = oauth2Client.generateAuthUrl({
 const getAccessToken = (oauth2Client, store, callback) => {
     const tokens = store.get('tokens');
     if (tokens) {
+        // Refresh access token.
         oauth2Client.refreshAccessToken(() => {
             oauth2Client.setCredentials(tokens);
             store.set('tokens', tokens);
@@ -46,7 +47,7 @@ const getAccessToken = (oauth2Client, store, callback) => {
     } else {
         console.log('Visit URL:\n', url);
         rl.question('Enter the code here:', function (code) {
-            // request access token
+            // Reqest access token.
             oauth2Client.getToken(code, function (err, tokens) {
                 if (err) {
                     return callback(err);
@@ -59,20 +60,7 @@ const getAccessToken = (oauth2Client, store, callback) => {
     }
 };
 
-const getAuthenticated = (store) => {
-    return new Promise((resolve, reject) => {
-        const cb = (err, resp) => {
-            if (err) {
-                reject(err);
-            }
-            resolve(resp);
-        }
-        getAccessToken(oauth2Client, store, cb);
-    })
-}
-
 module.exports = {
     oauth2Client,
     getAccessToken,
-    getAuthenticated,
 }
