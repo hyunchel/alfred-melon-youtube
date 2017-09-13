@@ -78,6 +78,7 @@ const playlists = {
 
     update(playlistId, title, description, callback) {
         const requestOptions = {
+            auth: oauth2Client,
             part: 'snippet,status',
             id: playlistId,
             title,
@@ -96,6 +97,7 @@ const playlists = {
 
     delete(playlistId, callback) {
         const requestOptions = {
+            auth: oauth2Client,
             id: playlistId,
         };
         return new Promise((resolve, reject) => {
