@@ -4,11 +4,9 @@ const google = require('googleapis');
 const OAuth2 = google.auth.OAuth2;
 
 const CREDENTIALS = readJson(`${__dirname}/credentials.json`);
-const YOUR_CLIENT_ID = CREDENTIALS.web.client_id;
-const YOUR_CLIENT_SECRET = CREDENTIALS.web.client_secret;
-// This errors out - check for a ticket.
-// const YOUR_REDIRECT_URL = CREDENTIALS.web.redirect_uris;
-const YOUR_REDIRECT_URL = CREDENTIALS.web.redirect_uris[0];
+const YOUR_CLIENT_ID = CREDENTIALS.installed.client_id;
+const YOUR_CLIENT_SECRET = CREDENTIALS.installed.client_secret;
+const YOUR_REDIRECT_URL = CREDENTIALS.installed.redirect_uris[0];
 
 var oauth2Client = new OAuth2(
   YOUR_CLIENT_ID,
@@ -45,7 +43,7 @@ const getAccessToken = (oauth2Client, store, callback) => {
         oauth2Client.setCredentials(tokens);
         callback();
     } else {
-        console.log('Visit URL: ', url);
+        console.log('Visit URL:\n', url);
         rl.question('Enter the code here:', function (code) {
             // request access token
             oauth2Client.getToken(code, function (err, tokens) {
