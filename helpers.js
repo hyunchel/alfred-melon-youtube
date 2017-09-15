@@ -1,5 +1,4 @@
 const Melon = require('melon-chart-api');
-const { oauth2Client, getAccessToken } = require('./auth');
 const { searchVideos } = require('./apis/search');
 const { listPlaylists, insertPlaylists, deletePlaylists } = require('./apis/playlists');
 const { insertPlaylistItems } = require('./apis/playlistItems');
@@ -126,23 +125,10 @@ const deletePlaylist = (data) => {
     return deletePlaylists(playlistId, callback);
 };
 
-const getAuthenticated = (data) => {
-    return new Promise((resolve, reject) => {
-        const cb = (err) => {
-            if (err) {
-                reject(err);
-            }
-            resolve(data);
-        }
-        getAccessToken(oauth2Client, data.store, cb);
-    })
-};
-
 module.exports = {
     getQueries,
     getVideoIds,
     getPlaylistId,
     insertIntoPlaylist,
     deletePlaylist,
-    getAuthenticated,
 }

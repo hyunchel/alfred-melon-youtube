@@ -1,16 +1,16 @@
 const alfy = require('alfy');
+const { refreshAccessTokenPromise } = require('./auth');
 const {
     getQueries,
     getVideoIds,
     getPlaylistId,
     insertIntoPlaylist,
     deletePlaylist,
-    getAuthenticated,
 } = require('./helpers');
 
 const createAction = (date, cutLine) => {
     const data = { date, cutLine, store: alfy.config };
-    getAuthenticated(data)
+    refreshAccessTokenPromise(data)
         .then(getQueries)
         .then(getVideoIds)
         .then(getPlaylistId)
@@ -20,7 +20,7 @@ const createAction = (date, cutLine) => {
 
 const deleteAction = (date, cutLine) => {
     const data = { date, cutLine, store: alfy.config };
-    getAuthenticated(data)
+    refreshAccessTokenPromise(data)
         .then(getQueries)
         .then(getVideoIds)
         .then(getPlaylistId)

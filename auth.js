@@ -50,8 +50,27 @@ const getAccessTokenPromise = (store, code) => {
     });
 };
 
+const refreshAccessTokenPromise = (data) => {
+    return new Promise((resolve, reject) => {
+        const callback = (err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve(data);
+        }
+        // Refresh access token.
+        oauth2Client.refreshAccessToken((err, tokens) => {
+            oauth2Client.setCredentials(tokens);
+            data.store.set('tokens', tokens);
+            callback(err);
+        })
+    })
+
+};
+
 module.exports = {
     oauth2Client,
     getAccessTokenPromise,
+    refreshAccessTokenPromise,
     url,
 }
