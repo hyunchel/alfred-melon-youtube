@@ -1,4 +1,3 @@
-const readline = require('readline');
 const readJson = require('r-json');
 const google = require('googleapis');
 const OAuth2 = google.auth.OAuth2;
