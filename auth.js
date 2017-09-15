@@ -14,11 +14,6 @@ var oauth2Client = new OAuth2(
   YOUR_REDIRECT_URL,
 );
 
-var rl = readline.createInterface({
-    input: process.stdin,
-    output: process.stdout
-  });
-
 // generate a url that asks permissions for Google+ and Google Calendar scopes
 var scopes = [
   'https://www.googleapis.com/auth/youtube',
@@ -34,31 +29,6 @@ var url = oauth2Client.generateAuthUrl({
   // Optional property that passes state parameters to redirect URI
   // state: { foo: 'bar' }
 });
-
-const getAccessToken = (oauth2Client, store, callback) => {
-    const tokens = store.get('tokens');
-    if (tokens) {
-        // Refresh access token.
-        oauth2Client.refreshAccessToken(() => {
-            oauth2Client.setCredentials(tokens);
-            store.set('tokens', tokens);
-            callback();
-        })
-    } else {
-        console.log('Visit URL:\n', url);
-        rl.question('Enter the code here:', function (code) {
-            // Reqest access token.
-            oauth2Client.getToken(code, function (err, tokens) {
-                if (err) {
-                    return callback(err);
-                }
-                oauth2Client.setCredentials(tokens);
-                store.set('tokens', tokens);
-                callback();
-            });
-        });
-    }
-};
 
 const getAccessTokenPromise = (store, code) => {
     return new Promise((resolve, reject) => {
@@ -82,7 +52,6 @@ const getAccessTokenPromise = (store, code) => {
 
 module.exports = {
     oauth2Client,
-    getAccessToken,
     getAccessTokenPromise,
     url,
 }

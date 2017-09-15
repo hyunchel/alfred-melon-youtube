@@ -1,7 +1,7 @@
 const alfy = require('alfy');
 const google = require('googleapis');
 const youtube = google.youtube('v3');
-const { oauth2Client, getAccessToken } = require('../auth');
+const { oauth2Client } = require('../auth');
 
 const search = {
    list(query, callback) {
@@ -27,7 +27,7 @@ const search = {
                 }
                 resolve(callback(err, resp))
             };
-            getAccessToken(oauth2Client, alfy.config, () => youtube.search.list(requestOptions, cb));
+            youtube.search.list(requestOptions, cb);
         });
    },
 };
@@ -47,7 +47,7 @@ const playlists = {
                 }
                 resolve(callback(err, resp))
             };
-            getAccessToken(oauth2Client, alfy.config, () => youtube.playlists.list(requestOptions, cb));
+            youtube.playlists.list(requestOptions, cb);
         });
     },
 
@@ -72,7 +72,7 @@ const playlists = {
                 }
                 resolve(callback(err, resp))
             };
-            getAccessToken(oauth2Client, alfy.config, () => youtube.playlists.insert(requestOptions, cb));
+            youtube.playlists.insert(requestOptions, cb);
         });
     },
 
@@ -91,7 +91,7 @@ const playlists = {
                 }
                 resolve(callback(err, resp))
             };
-            getAccessToken(oauth2Client, alfy.config, () => youtube.playlists.update(requestOptions, cb));
+            youtube.playlists.update(requestOptions, cb);
         });
     },
 
@@ -107,7 +107,7 @@ const playlists = {
                 }
                 resolve(callback(err, resp))
             };
-            getAccessToken(oauth2Client, alfy.config, () => youtube.playlists.delete(requestOptions, cb));
+            youtube.playlists.delete(requestOptions, cb);
         });
     },
 };
@@ -127,7 +127,7 @@ const playlistItems = {
                 }
                 resolve(callback(err, resp))
             };
-            getAccessToken(oauth2Client, alfy.config, () => youtube.playlistItems.list(requestOptions, cb));
+            youtube.playlistItems.list(requestOptions, cb);
         });
     },
 
@@ -153,7 +153,7 @@ const playlistItems = {
                 }
                 resolve(callback(err, resp))
             };
-            getAccessToken(oauth2Client, alfy.config, () => youtube.playlistItems.insert(requestOptions, cb));
+            youtube.playlistItems.insert(requestOptions, cb);
         });
     },
 
@@ -180,7 +180,7 @@ const playlistItems = {
                 }
                 resolve(callback(err, resp))
             };
-            getAccessToken(oauth2Client, alfy.config, () => youtube.playlistItems.update(requestOptions, cb));
+            youtube.playlistItems.update(requestOptions, cb);
         });
 
     },
@@ -197,7 +197,7 @@ const playlistItems = {
                 }
                 resolve(callback(err, resp))
             };
-            getAccessToken(oauth2Client, alfy.config, () => youtube.playlistItems.delete(requestOptions, cb));
+            youtube.playlistItems.delete(requestOptions, cb);
         });
     },
 };
