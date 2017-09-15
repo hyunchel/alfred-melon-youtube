@@ -38,7 +38,7 @@ const OPTIONS = {
  * authenticateThenMakeOptions
  * Attempts to authenticate, then creates an option that corresponds to its result.
  * @param {string} inputString A string from Alfred input.
- * @param {Object} store An object that contains "config" from Alfy.
+ * @param {object} store An object that contains "config" from Alfy.
  */
 const authenticateThenMakeOptions = (inputString, store) => {
     return new Promise((resolve, reject) => {
@@ -56,7 +56,7 @@ const authenticateThenMakeOptions = (inputString, store) => {
  * makeOptions
  * Creates options to display in Alfred toggle.
  * @param {string} inputString A string from Alfred input.
- * @param {Object} store An object that contains "config" from Alfy.
+ * @param {object} store An object that contains "config" from Alfy.
  */
 const makeOptions = (inputString, store) => {
     const items = [];

@@ -14,22 +14,21 @@ var oauth2Client = new OAuth2(
   YOUR_REDIRECT_URL,
 );
 
-// generate a url that asks permissions for Google+ and Google Calendar scopes
-var scopes = [
+const scopes = [
   'https://www.googleapis.com/auth/youtube',
 ];
 
-var url = oauth2Client.generateAuthUrl({
-  // 'online' (default) or 'offline' (gets refresh_token)
+const url = oauth2Client.generateAuthUrl({
   access_type: 'offline',
-
-  // If you only need one scope you can pass it as a string
   scope: scopes,
-
-  // Optional property that passes state parameters to redirect URI
-  // state: { foo: 'bar' }
 });
 
+/**
+ * getAccessTokenPromise
+ * Authenticates with given code and sets authentication tokens into global config store.
+ * @param {object} store An object that contains "config" from Alfy.
+ * @param {string} code A string formatted code from Google OAuth2 procedure.
+ */
 const getAccessTokenPromise = (store, code) => {
     return new Promise((resolve, reject) => {
         const callback = (err) => {
@@ -50,7 +49,13 @@ const getAccessTokenPromise = (store, code) => {
     });
 };
 
+/**
+ * refreshAccessTokenPromise
+ * Requests a refresh on authentication token.
+ * @param {object} data An object that contains global "store".
+ */
 const refreshAccessTokenPromise = (data) => {
+    oauth2Client.setCredentials(data.store.get('tokens'));
     return new Promise((resolve, reject) => {
         const callback = (err) => {
             if (err) {
