@@ -60,7 +60,29 @@ const getAccessToken = (oauth2Client, store, callback) => {
     }
 };
 
+const getAccessTokenPromise = (store, code) => {
+    return new Promise((resolve, reject) => {
+        const callback = (err) => {
+            if (err) {
+                reject(err);
+            }
+            resolve();
+        };
+        // Reqest access token.
+        oauth2Client.getToken(code, function (err, tokens) {
+            if (err) {
+                return callback(err);
+            }
+            oauth2Client.setCredentials(tokens);
+            store.set('tokens', tokens);
+            callback();
+        });
+    });
+};
+
 module.exports = {
     oauth2Client,
     getAccessToken,
+    getAccessTokenPromise,
+    url,
 }
